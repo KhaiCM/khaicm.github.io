@@ -26,3 +26,56 @@ Tuy nhiên, NGINX không phải là máy chủ web duy nhất trên thị trư�
 - Nó có khả năng phân phối nội dung tĩnh nhanh hơn với mức sử dụng tài nguyên thấp.
 
 Nginx xuất hiện sau Apache, với nhận thức rõ ràng hơn về các vấn đề đồng thời sẽ phải đối mặt với các trang web trên quy mô lớn. Tận dụng kiến ​​thức này, Nginx được thiết kế ngay từ đầu để sử dụng thuật toán xử lý kết nối theo hướng sự kiện, không đồng bộ, không chặn.
+
+Nginx tạo ra các worker processes, mỗi processes có thể xử lý hàng nghìn kết nối. Các worker processes thực hiện điều này bằng cách triển khai cơ chế lặp nhanh liên tục kiểm tra và xử lý các sự kiện. Việc tách công việc thực tế khỏi các kết nối cho phép mỗi worker chỉ quan tâm đến kết nối khi một sự kiện mới đã được trigger.
+
+![image](https://user-images.githubusercontent.com/51064915/183699197-2f6d1ff7-2bed-4054-9f97-4e0f6236c3f8.png)
+
+NGINX nhanh hơn trong việc phân phối nội dung tĩnh và tương đối nhẹ về tài nguyên vì nó không nhúng bộ xử lý ngôn ngữ lập trình động. Khi có yêu cầu về nội dung tĩnh, NGINX chỉ cần trả lời bằng tệp mà không cần chạy bất kỳ quy trình bổ sung nào.
+
+Điều đó không có nghĩa là NGINX không thể xử lý các request yêu cầu bộ xử lý ngôn ngữ lập trình động. Trong những trường hợp như vậy, NGINX chỉ cần ủy quyền các tác vụ cho các quy trình riêng biệt như PHP-FPM, Node.js hoặc Python. Sau đó, khi quá trình đó hoàn thành công việc của nó, NGINX sẽ ủy quyền ngược lại phản hồi cho máy khách.
+
+![image](https://user-images.githubusercontent.com/51064915/183703051-b756664f-46cb-4edd-a578-df5d938e79aa.png)
+
+NGINX cũng dễ dàng cấu hình hơn rất nhiều nhờ vào cú pháp tệp cấu hình lấy cảm hứng từ các ngôn ngữ kịch bản khác nhau, dẫn đến các tệp cấu hình nhỏ gọn, dễ bảo trì.
+
+## Cài đặt NGINX
+
+```
+sudo apt-get update
+sudo apt-get install nginx
+```
+
+Theo mặc định, Nginx được định cấu hình để khởi động tự động khi máy chủ khởi động. Nếu muốn, bạn có thể tắt hành vi này bằng cách nhập:
+```
+sudo systemctl disable nginx
+```
+
+Để bật lại dịch vụ khởi động khi khởi động, hãy nhập:
+```
+sudo systemctl enable nginx
+```
+
+Sau khi cài đặt xong, NGINX sẽ tự động được đăng ký như một dịch vụ systemd và sẽ active. Để kiểm tra, hãy thực hiện lệnh sau:
+```
+sudo systemctl status nginx
+
+# ● nginx.service - A high performance web server and a reverse proxy server
+#      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+#      Active: active (running)
+```
+
+Nếu status là ative, thì bạn đã sẵn sàng. Nếu không, bạn có thể bắt đầu dịch vụ bằng cách thực hiện lệnh này:
+```
+sudo systemctl start nginx
+```
+
+Để dừng máy chủ Nginx đang chạy của bạn:
+```
+sudo systemctl stop nginx
+```
+
+Để có thể khởi động lại NGINX chạy:
+```
+sudo systemctl restart nginx
+```
