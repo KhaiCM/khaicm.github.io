@@ -1,1426 +1,600 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentines</title>
-    <style>
-        body {
-            background: #fff;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            font-family: "Anton", sans-serif;
-            justify-content: center;
-            align-items: center;
-            perspective: 1300px;
-        }
-
-        div {
-            position: absolute;
-            transform-style: preserve-3d;
-        }
-
-        #chocolate_rains {
-            transform: rotateX(-15deg);
-        }
-
-        .heart .ring {
-            width: 300px;
-            height: 300px;
-            border-radius: 100%;
-            opacity: 0;
-            border: 1px solid red;
-        }
-
-        .heart .left {
-            left: -20px;
-            width: 20px;
-            height: 20px;
-            background: #c80000;
-            border-radius: 100%;
-            transform-origin: 100% 0;
-        }
-
-        .heart .left::before {
-            content: "";
-            position: absolute;
-            top: 10px;
-            width: 20px;
-            height: 25px;
-            background: #c80000;
-            border-radius: 0 0 0 100%;
-        }
-
-        .heart .right {
-            width: 20px;
-            height: 20px;
-            background: #c80000;
-            border-radius: 100%;
-            transform-origin: 0 0;
-        }
-
-        .heart .right::before {
-            content: "";
-            position: absolute;
-            top: 10px;
-            width: 20px;
-            height: 25px;
-            background: #c80000;
-            border-radius: 0 0 100% 0;
-        }
-
-        .heart .movable {
-            opacity: 0;
-        }
-
-        .heart .reverse {
-            transform: translateY(70px) rotateZ(180deg);
-            opacity: 0.1;
-        }
-
-        .heart .reverse .left,
-        .heart .reverse .right {
-            opacity: 0.5;
-        }
-
-        .heart:nth-child(1) {
-            transform: translateX(223px) translateZ(732px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(1) .movable {
-            -webkit-animation: drop 5000ms -2815ms linear infinite;
-            animation: drop 5000ms -2815ms linear infinite;
-        }
-
-        .heart:nth-child(1) .ring {
-            -webkit-animation: wave 5000ms 1085ms ease-out infinite;
-            animation: wave 5000ms 1085ms ease-out infinite;
-        }
-
-        .heart:nth-child(1) .inner {
-            -webkit-animation: rotation 3954ms linear infinite;
-            animation: rotation 3954ms linear infinite;
-        }
-
-        .heart:nth-child(2) {
-            transform: translateX(-498px) translateZ(85px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(2) .movable {
-            -webkit-animation: drop 5000ms -1660ms linear infinite;
-            animation: drop 5000ms -1660ms linear infinite;
-        }
-
-        .heart:nth-child(2) .ring {
-            -webkit-animation: wave 5000ms 2240ms ease-out infinite;
-            animation: wave 5000ms 2240ms ease-out infinite;
-        }
-
-        .heart:nth-child(2) .inner {
-            -webkit-animation: rotation 4224ms linear infinite;
-            animation: rotation 4224ms linear infinite;
-        }
-
-        .heart:nth-child(3) {
-            transform: translateX(26px) translateZ(532px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(3) .movable {
-            -webkit-animation: drop 5000ms 1320ms linear infinite;
-            animation: drop 5000ms 1320ms linear infinite;
-        }
-
-        .heart:nth-child(3) .ring {
-            -webkit-animation: wave 5000ms 5220ms ease-out infinite;
-            animation: wave 5000ms 5220ms ease-out infinite;
-        }
-
-        .heart:nth-child(3) .inner {
-            -webkit-animation: rotation 3248ms linear infinite;
-            animation: rotation 3248ms linear infinite;
-        }
-
-        .heart:nth-child(4) {
-            transform: translateX(373px) translateZ(140px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(4) .movable {
-            -webkit-animation: drop 5000ms 224ms linear infinite;
-            animation: drop 5000ms 224ms linear infinite;
-        }
-
-        .heart:nth-child(4) .ring {
-            -webkit-animation: wave 5000ms 4124ms ease-out infinite;
-            animation: wave 5000ms 4124ms ease-out infinite;
-        }
-
-        .heart:nth-child(4) .inner {
-            -webkit-animation: rotation 3098ms linear infinite;
-            animation: rotation 3098ms linear infinite;
-        }
-
-        .heart:nth-child(5) {
-            transform: translateX(98px) translateZ(-93px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(5) .movable {
-            -webkit-animation: drop 5000ms 680ms linear infinite;
-            animation: drop 5000ms 680ms linear infinite;
-        }
-
-        .heart:nth-child(5) .ring {
-            -webkit-animation: wave 5000ms 4580ms ease-out infinite;
-            animation: wave 5000ms 4580ms ease-out infinite;
-        }
-
-        .heart:nth-child(5) .inner {
-            -webkit-animation: rotation 2360ms linear infinite;
-            animation: rotation 2360ms linear infinite;
-        }
-
-        .heart:nth-child(6) {
-            transform: translateX(241px) translateZ(-555px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(6) .movable {
-            -webkit-animation: drop 5000ms 1340ms linear infinite;
-            animation: drop 5000ms 1340ms linear infinite;
-        }
-
-        .heart:nth-child(6) .ring {
-            -webkit-animation: wave 5000ms 5240ms ease-out infinite;
-            animation: wave 5000ms 5240ms ease-out infinite;
-        }
-
-        .heart:nth-child(6) .inner {
-            -webkit-animation: rotation 2792ms linear infinite;
-            animation: rotation 2792ms linear infinite;
-        }
-
-        .heart:nth-child(7) {
-            transform: translateX(-363px) translateZ(125px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(7) .movable {
-            -webkit-animation: drop 5000ms 1354ms linear infinite;
-            animation: drop 5000ms 1354ms linear infinite;
-        }
-
-        .heart:nth-child(7) .ring {
-            -webkit-animation: wave 5000ms 5254ms ease-out infinite;
-            animation: wave 5000ms 5254ms ease-out infinite;
-        }
-
-        .heart:nth-child(7) .inner {
-            -webkit-animation: rotation 4406ms linear infinite;
-            animation: rotation 4406ms linear infinite;
-        }
-
-        .heart:nth-child(8) {
-            transform: translateX(-304px) translateZ(579px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(8) .movable {
-            -webkit-animation: drop 5000ms 320ms linear infinite;
-            animation: drop 5000ms 320ms linear infinite;
-        }
-
-        .heart:nth-child(8) .ring {
-            -webkit-animation: wave 5000ms 4220ms ease-out infinite;
-            animation: wave 5000ms 4220ms ease-out infinite;
-        }
-
-        .heart:nth-child(8) .inner {
-            -webkit-animation: rotation 2510ms linear infinite;
-            animation: rotation 2510ms linear infinite;
-        }
-
-        .heart:nth-child(9) {
-            transform: translateX(-223px) translateZ(39px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(9) .movable {
-            -webkit-animation: drop 5000ms 1707ms linear infinite;
-            animation: drop 5000ms 1707ms linear infinite;
-        }
-
-        .heart:nth-child(9) .ring {
-            -webkit-animation: wave 5000ms 5607ms ease-out infinite;
-            animation: wave 5000ms 5607ms ease-out infinite;
-        }
-
-        .heart:nth-child(9) .inner {
-            -webkit-animation: rotation 3019ms linear infinite;
-            animation: rotation 3019ms linear infinite;
-        }
-
-        .heart:nth-child(10) {
-            transform: translateX(111px) translateZ(-145px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(10) .movable {
-            -webkit-animation: drop 5000ms 119ms linear infinite;
-            animation: drop 5000ms 119ms linear infinite;
-        }
-
-        .heart:nth-child(10) .ring {
-            -webkit-animation: wave 5000ms 4019ms ease-out infinite;
-            animation: wave 5000ms 4019ms ease-out infinite;
-        }
-
-        .heart:nth-child(10) .inner {
-            -webkit-animation: rotation 4403ms linear infinite;
-            animation: rotation 4403ms linear infinite;
-        }
-
-        .heart:nth-child(11) {
-            transform: translateX(-166px) translateZ(-15px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(11) .movable {
-            -webkit-animation: drop 5000ms -912ms linear infinite;
-            animation: drop 5000ms -912ms linear infinite;
-        }
-
-        .heart:nth-child(11) .ring {
-            -webkit-animation: wave 5000ms 2988ms ease-out infinite;
-            animation: wave 5000ms 2988ms ease-out infinite;
-        }
-
-        .heart:nth-child(11) .inner {
-            -webkit-animation: rotation 2403ms linear infinite;
-            animation: rotation 2403ms linear infinite;
-        }
-
-        .heart:nth-child(12) {
-            transform: translateX(-141px) translateZ(-212px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(12) .movable {
-            -webkit-animation: drop 5000ms -881ms linear infinite;
-            animation: drop 5000ms -881ms linear infinite;
-        }
-
-        .heart:nth-child(12) .ring {
-            -webkit-animation: wave 5000ms 3019ms ease-out infinite;
-            animation: wave 5000ms 3019ms ease-out infinite;
-        }
-
-        .heart:nth-child(12) .inner {
-            -webkit-animation: rotation 2745ms linear infinite;
-            animation: rotation 2745ms linear infinite;
-        }
-
-        .heart:nth-child(13) {
-            transform: translateX(282px) translateZ(639px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(13) .movable {
-            -webkit-animation: drop 5000ms -2963ms linear infinite;
-            animation: drop 5000ms -2963ms linear infinite;
-        }
-
-        .heart:nth-child(13) .ring {
-            -webkit-animation: wave 5000ms 937ms ease-out infinite;
-            animation: wave 5000ms 937ms ease-out infinite;
-        }
-
-        .heart:nth-child(13) .inner {
-            -webkit-animation: rotation 2464ms linear infinite;
-            animation: rotation 2464ms linear infinite;
-        }
-
-        .heart:nth-child(14) {
-            transform: translateX(276px) translateZ(69px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(14) .movable {
-            -webkit-animation: drop 5000ms -2798ms linear infinite;
-            animation: drop 5000ms -2798ms linear infinite;
-        }
-
-        .heart:nth-child(14) .ring {
-            -webkit-animation: wave 5000ms 1102ms ease-out infinite;
-            animation: wave 5000ms 1102ms ease-out infinite;
-        }
-
-        .heart:nth-child(14) .inner {
-            -webkit-animation: rotation 3022ms linear infinite;
-            animation: rotation 3022ms linear infinite;
-        }
-
-        .heart:nth-child(15) {
-            transform: translateX(172px) translateZ(-238px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(15) .movable {
-            -webkit-animation: drop 5000ms 1986ms linear infinite;
-            animation: drop 5000ms 1986ms linear infinite;
-        }
-
-        .heart:nth-child(15) .ring {
-            -webkit-animation: wave 5000ms 5886ms ease-out infinite;
-            animation: wave 5000ms 5886ms ease-out infinite;
-        }
-
-        .heart:nth-child(15) .inner {
-            -webkit-animation: rotation 3550ms linear infinite;
-            animation: rotation 3550ms linear infinite;
-        }
-
-        .heart:nth-child(16) {
-            transform: translateX(141px) translateZ(784px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(16) .movable {
-            -webkit-animation: drop 5000ms -1163ms linear infinite;
-            animation: drop 5000ms -1163ms linear infinite;
-        }
-
-        .heart:nth-child(16) .ring {
-            -webkit-animation: wave 5000ms 2737ms ease-out infinite;
-            animation: wave 5000ms 2737ms ease-out infinite;
-        }
-
-        .heart:nth-child(16) .inner {
-            -webkit-animation: rotation 2507ms linear infinite;
-            animation: rotation 2507ms linear infinite;
-        }
-
-        .heart:nth-child(17) {
-            transform: translateX(411px) translateZ(-269px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(17) .movable {
-            -webkit-animation: drop 5000ms -1487ms linear infinite;
-            animation: drop 5000ms -1487ms linear infinite;
-        }
-
-        .heart:nth-child(17) .ring {
-            -webkit-animation: wave 5000ms 2413ms ease-out infinite;
-            animation: wave 5000ms 2413ms ease-out infinite;
-        }
-
-        .heart:nth-child(17) .inner {
-            -webkit-animation: rotation 4125ms linear infinite;
-            animation: rotation 4125ms linear infinite;
-        }
-
-        .heart:nth-child(18) {
-            transform: translateX(-308px) translateZ(-366px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(18) .movable {
-            -webkit-animation: drop 5000ms -2460ms linear infinite;
-            animation: drop 5000ms -2460ms linear infinite;
-        }
-
-        .heart:nth-child(18) .ring {
-            -webkit-animation: wave 5000ms 1440ms ease-out infinite;
-            animation: wave 5000ms 1440ms ease-out infinite;
-        }
-
-        .heart:nth-child(18) .inner {
-            -webkit-animation: rotation 3433ms linear infinite;
-            animation: rotation 3433ms linear infinite;
-        }
-
-        .heart:nth-child(19) {
-            transform: translateX(-475px) translateZ(288px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(19) .movable {
-            -webkit-animation: drop 5000ms 1545ms linear infinite;
-            animation: drop 5000ms 1545ms linear infinite;
-        }
-
-        .heart:nth-child(19) .ring {
-            -webkit-animation: wave 5000ms 5445ms ease-out infinite;
-            animation: wave 5000ms 5445ms ease-out infinite;
-        }
-
-        .heart:nth-child(19) .inner {
-            -webkit-animation: rotation 4759ms linear infinite;
-            animation: rotation 4759ms linear infinite;
-        }
-
-        .heart:nth-child(20) {
-            transform: translateX(471px) translateZ(-239px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(20) .movable {
-            -webkit-animation: drop 5000ms -2096ms linear infinite;
-            animation: drop 5000ms -2096ms linear infinite;
-        }
-
-        .heart:nth-child(20) .ring {
-            -webkit-animation: wave 5000ms 1804ms ease-out infinite;
-            animation: wave 5000ms 1804ms ease-out infinite;
-        }
-
-        .heart:nth-child(20) .inner {
-            -webkit-animation: rotation 3382ms linear infinite;
-            animation: rotation 3382ms linear infinite;
-        }
-
-        .heart:nth-child(21) {
-            transform: translateX(358px) translateZ(717px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(21) .movable {
-            -webkit-animation: drop 5000ms -1396ms linear infinite;
-            animation: drop 5000ms -1396ms linear infinite;
-        }
-
-        .heart:nth-child(21) .ring {
-            -webkit-animation: wave 5000ms 2504ms ease-out infinite;
-            animation: wave 5000ms 2504ms ease-out infinite;
-        }
-
-        .heart:nth-child(21) .inner {
-            -webkit-animation: rotation 2155ms linear infinite;
-            animation: rotation 2155ms linear infinite;
-        }
-
-        .heart:nth-child(22) {
-            transform: translateX(247px) translateZ(-290px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(22) .movable {
-            -webkit-animation: drop 5000ms -1683ms linear infinite;
-            animation: drop 5000ms -1683ms linear infinite;
-        }
-
-        .heart:nth-child(22) .ring {
-            -webkit-animation: wave 5000ms 2217ms ease-out infinite;
-            animation: wave 5000ms 2217ms ease-out infinite;
-        }
-
-        .heart:nth-child(22) .inner {
-            -webkit-animation: rotation 2154ms linear infinite;
-            animation: rotation 2154ms linear infinite;
-        }
-
-        .heart:nth-child(23) {
-            transform: translateX(390px) translateZ(220px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(23) .movable {
-            -webkit-animation: drop 5000ms -2526ms linear infinite;
-            animation: drop 5000ms -2526ms linear infinite;
-        }
-
-        .heart:nth-child(23) .ring {
-            -webkit-animation: wave 5000ms 1374ms ease-out infinite;
-            animation: wave 5000ms 1374ms ease-out infinite;
-        }
-
-        .heart:nth-child(23) .inner {
-            -webkit-animation: rotation 4265ms linear infinite;
-            animation: rotation 4265ms linear infinite;
-        }
-
-        .heart:nth-child(24) {
-            transform: translateX(24px) translateZ(578px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(24) .movable {
-            -webkit-animation: drop 5000ms -2610ms linear infinite;
-            animation: drop 5000ms -2610ms linear infinite;
-        }
-
-        .heart:nth-child(24) .ring {
-            -webkit-animation: wave 5000ms 1290ms ease-out infinite;
-            animation: wave 5000ms 1290ms ease-out infinite;
-        }
-
-        .heart:nth-child(24) .inner {
-            -webkit-animation: rotation 2860ms linear infinite;
-            animation: rotation 2860ms linear infinite;
-        }
-
-        .heart:nth-child(25) {
-            transform: translateX(-68px) translateZ(-588px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(25) .movable {
-            -webkit-animation: drop 5000ms -180ms linear infinite;
-            animation: drop 5000ms -180ms linear infinite;
-        }
-
-        .heart:nth-child(25) .ring {
-            -webkit-animation: wave 5000ms 3720ms ease-out infinite;
-            animation: wave 5000ms 3720ms ease-out infinite;
-        }
-
-        .heart:nth-child(25) .inner {
-            -webkit-animation: rotation 4167ms linear infinite;
-            animation: rotation 4167ms linear infinite;
-        }
-
-        .heart:nth-child(26) {
-            transform: translateX(377px) translateZ(-184px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(26) .movable {
-            -webkit-animation: drop 5000ms -2529ms linear infinite;
-            animation: drop 5000ms -2529ms linear infinite;
-        }
-
-        .heart:nth-child(26) .ring {
-            -webkit-animation: wave 5000ms 1371ms ease-out infinite;
-            animation: wave 5000ms 1371ms ease-out infinite;
-        }
-
-        .heart:nth-child(26) .inner {
-            -webkit-animation: rotation 4318ms linear infinite;
-            animation: rotation 4318ms linear infinite;
-        }
-
-        .heart:nth-child(27) {
-            transform: translateX(-21px) translateZ(138px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(27) .movable {
-            -webkit-animation: drop 5000ms 605ms linear infinite;
-            animation: drop 5000ms 605ms linear infinite;
-        }
-
-        .heart:nth-child(27) .ring {
-            -webkit-animation: wave 5000ms 4505ms ease-out infinite;
-            animation: wave 5000ms 4505ms ease-out infinite;
-        }
-
-        .heart:nth-child(27) .inner {
-            -webkit-animation: rotation 2469ms linear infinite;
-            animation: rotation 2469ms linear infinite;
-        }
-
-        .heart:nth-child(28) {
-            transform: translateX(233px) translateZ(-578px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(28) .movable {
-            -webkit-animation: drop 5000ms -1644ms linear infinite;
-            animation: drop 5000ms -1644ms linear infinite;
-        }
-
-        .heart:nth-child(28) .ring {
-            -webkit-animation: wave 5000ms 2256ms ease-out infinite;
-            animation: wave 5000ms 2256ms ease-out infinite;
-        }
-
-        .heart:nth-child(28) .inner {
-            -webkit-animation: rotation 4013ms linear infinite;
-            animation: rotation 4013ms linear infinite;
-        }
-
-        .heart:nth-child(29) {
-            transform: translateX(-418px) translateZ(-102px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(29) .movable {
-            -webkit-animation: drop 5000ms 118ms linear infinite;
-            animation: drop 5000ms 118ms linear infinite;
-        }
-
-        .heart:nth-child(29) .ring {
-            -webkit-animation: wave 5000ms 4018ms ease-out infinite;
-            animation: wave 5000ms 4018ms ease-out infinite;
-        }
-
-        .heart:nth-child(29) .inner {
-            -webkit-animation: rotation 3354ms linear infinite;
-            animation: rotation 3354ms linear infinite;
-        }
-
-        .heart:nth-child(30) {
-            transform: translateX(262px) translateZ(554px) scale3d(0.5, 0.5, 0.5);
-        }
-
-        .heart:nth-child(30) .movable {
-            -webkit-animation: drop 5000ms 134ms linear infinite;
-            animation: drop 5000ms 134ms linear infinite;
-        }
-
-        .heart:nth-child(30) .ring {
-            -webkit-animation: wave 5000ms 4034ms ease-out infinite;
-            animation: wave 5000ms 4034ms ease-out infinite;
-        }
-
-        .heart:nth-child(30) .inner {
-            -webkit-animation: rotation 3827ms linear infinite;
-            animation: rotation 3827ms linear infinite;
-        }
-
-        @-webkit-keyframes blur {
-            0% {
-                filter: blur(20px) grayscale(150%);
-            }
-
-            100% {
-                filter: blur(10px) grayscale(50%);
-            }
-        }
-
-        @keyframes blur {
-            0% {
-                filter: blur(20px) grayscale(150%);
-            }
-
-            100% {
-                filter: blur(10px) grayscale(50%);
-            }
-        }
-
-        @-webkit-keyframes rotation {
-            0% {
-                transform: rotateY(0deg);
-            }
-
-            100% {
-                transform: rotateY(360deg);
-            }
-        }
-
-        @keyframes rotation {
-            0% {
-                transform: rotateY(0deg);
-            }
-
-            100% {
-                transform: rotateY(360deg);
-            }
-        }
-
-        @-webkit-keyframes drop {
-            0% {
-                transform: translateY(-1000px);
-                opacity: 0;
-            }
-
-            80% {
-                transform: translateY(0);
-                opacity: 3;
-            }
-
-            100% {
-                transform: translateY(-40px);
-                opacity: 0;
-            }
-        }
-
-        @keyframes drop {
-            0% {
-                transform: translateY(-1000px);
-                opacity: 0;
-            }
-
-            80% {
-                transform: translateY(0);
-                opacity: 3;
-            }
-
-            100% {
-                transform: translateY(-40px);
-                opacity: 0;
-            }
-        }
-
-        @-webkit-keyframes wave {
-            0% {
-                transform: translate(-50%, -50%) rotateX(90deg) scale(0) translateZ(-37px);
-                opacity: 2;
-            }
-
-            100% {
-                transform: translate(-50%, -50%) rotateX(90deg) scale(2) translateZ(-37px);
-                opacity: 0;
-            }
-        }
-
-        @keyframes wave {
-            0% {
-                transform: translate(-50%, -50%) rotateX(90deg) scale(0) translateZ(-37px);
-                opacity: 2;
-            }
-
-            100% {
-                transform: translate(-50%, -50%) rotateX(90deg) scale(2) translateZ(-37px);
-                opacity: 0;
-            }
-        }
-
-        @-webkit-keyframes wing {
-            0% {
-                transform: rotateY(70deg);
-            }
-
-            100% {
-                transform: rotateY(0deg);
-            }
-        }
-
-        @keyframes wing {
-            0% {
-                transform: rotateY(70deg);
-            }
-
-            100% {
-                transform: rotateY(0deg);
-            }
-        }
-    </style>
-
-    <style>
-        .container {
-            position: relative;
-        }
-
-        .valentines {
-            position: relative;
-            top: 50px;
-            cursor: pointer;
-            animation: up 3s linear infinite;
-        }
-
-        @keyframes up {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-30px);
-            }
-        }
-
-
-        .envelope {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            background-color: #f08080;
-        }
-
-        .envelope:before {
-            background-color: #f08080;
-            content: "";
-            position: absolute;
-            width: 212px;
-            height: 212px;
-            transform: rotate(45deg);
-            top: -105px;
-            left: 44px;
-            border-radius: 30px 0 0 0;
-        }
-
-        .card {
-            position: absolute;
-            background-color: #eae2b7;
-            width: 270px;
-            height: 170px;
-            top: 5px;
-            left: 15px;
-            box-shadow: -5px -5px 100px rgba(0, 0, 0, 0.4);
-        }
-
-        .card:before {
-            content: "";
-            position: absolute;
-            border: 3px solid #003049;
-            border-style: dotted;
-            width: 240px;
-            heighT: 140px;
-            left: 12px;
-            top: 12px;
-        }
-
-        .text {
-            position: absolute;
-            font-family: 'Brush Script MT', cursive;
-            font-size: 28px;
-            text-align: center;
-            line-height: 30px;
-            top: 19px;
-            left: 85px;
-            color: #003049;
-        }
-
-        .hearts {
-            position: absolute
-        }
-
-        .front {
-            position: absolute;
-            border-right: 180px solid #f4978e;
-            border-top: 95px solid transparent;
-            border-bottom: 100px solid transparent;
-            left: 120px;
-            top: 5px;
-            width: 0;
-            height: 0;
-            z-index: 10;
-        }
-
-        .front:before {
-            position: absolute;
-            content: "";
-            border-left: 300px solid #f8ad9d;
-            border-top: 195px solid transparent;
-            left: -120px;
-            top: -95px;
-            width: 0;
-            height: 0;
-        }
-    </style>
-
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <style id="dynamic"></style>
+    <title>Holiday!</title>
 </head>
+<style>
+    html,
+    body {
+        /* background-color: #fff6ff; */
+        background-color: #e2daff;
+        margin: 0;
+        display: flex;
+        cursor: default;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        padding: 0;
+    }
+
+    .main {
+        vertical-align: middle;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    .container {
+        margin-left: 5%;
+        margin-top: 7%;
+        margin-right: 5%;
+    }
+
+    h1 {
+        font-size: 2em;
+        color: #e91e63;
+        margin-bottom: 10px;
+    }
+
+    .wrapper {
+        align-items: center;
+    }
+
+    .sub-text {
+        font-weight: 200;
+        line-height: 1.5em;
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    @-webkit-keyframes wobble {
+
+        0%,
+        50%,
+        100% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(10deg);
+        }
+
+        75% {
+            transform: rotate(-10deg);
+        }
+    }
+
+    @keyframes wobble {
+
+        0%,
+        50%,
+        100% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(10deg);
+        }
+
+        75% {
+            transform: rotate(-10deg);
+        }
+    }
+
+    #falling-hearts {
+        animation: wobble 60s ease-in infinite;
+        position: fixed;
+        inset: 0 0 0 0;
+        pointer-events: none;
+    }
+
+    .heart {
+        pointer-events: none;
+        opacity: 0;
+        z-index: 1000;
+        position: fixed;
+    }
+
+    .letter {
+        display: inline-block;
+        padding: 0 10%;
+    }
+
+    .inline {
+        margin-top: 10%;
+        margin-left: 40%;
+        position: relative;
+        max-width: 20%;
+    }
+
+    .rose {
+        animation: yidon 5s infinite;
+        transform: translateY(40%);
+        display: inline-block;
+        position: absolute;
+    }
+
+    .petal {
+        width: 50px;
+        height: 50px;
+        background: #fe7696;
+        border-radius: 0px 50%;
+        position: absolute;
+        box-shadow: 0 0 10px #d1123f;
+        z-index: 2;
+        transform-origin: bottom right;
+        animation: zhankai2 10s infinite;
+    }
+
+    .petal:nth-child(2) {
+        transform-origin: right bottom;
+        transform: rotate(90deg);
+        background: #fe7696;
+        left: -10px;
+        animation: zhankai1 10s infinite;
+    }
+
+    .petal:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        left: 10px;
+        top: -20px;
+        z-index: 1;
+        background: #f03a64;
+        transform-origin: bottom right;
+        animation: zhankai2 10s infinite;
+    }
+
+    .petal:nth-child(4) {
+        transform: rotate(90deg);
+        width: 40px;
+        height: 40px;
+        left: 0px;
+        top: -20px;
+        z-index: 1;
+        background: #f03a64;
+        transform-origin: bottom right;
+        animation: zhankai1 10s infinite;
+    }
+
+    .petal:nth-child(5) {
+        width: 50px;
+        height: 50px;
+        border-radius: 20px;
+        left: 20px;
+        top: -30px;
+        z-index: 0;
+        background: #d1123f;
+    }
+
+    .leaf {
+        position: absolute;
+        top: 120px;
+        left: -115px;
+    }
+
+    .stem {
+        width: 240px;
+        height: 40px;
+        background: transparent;
+        border: 8px solid #8ac78a;
+        border-color: #77a377 transparent transparent transparent;
+        border-radius: 50% 0%;
+        transform: rotate(100deg);
+    }
+
+    .leafs {
+        width: 50px;
+        height: 40px;
+        border-radius: 0px 50%;
+        background: #77a377;
+        position: absolute;
+        top: 0;
+        left: 100px;
+        z-index: 49;
+    }
+
+    .leafs:nth-child(2) {
+        width: 40px;
+        height: 20px;
+        top: 40px;
+        left: 140px;
+        transform: rotate(120deg);
+    }
+
+    /* rose 1 */
+
+    .rose-1 {
+        margin-left: 95%;
+        position: absolute;
+        animation: yidon 5s infinite;
+        transform: translateY(40%);
+        rotate: 15deg;
+    }
+
+    .petal-1 {
+        width: 50px;
+        height: 50px;
+        background: #fe7696;
+        border-radius: 0px 50%;
+        position: absolute;
+        box-shadow: 0 0 10px #d1123f;
+        z-index: 2;
+        transform-origin: bottom right;
+        animation: zhankai2 10s infinite;
+    }
+
+    .petal-1:nth-child(2) {
+        transform-origin: right bottom;
+        transform: rotate(90deg);
+        background: #fe7696;
+        left: -10px;
+        animation: zhankai1 10s infinite;
+    }
+
+    .petal-1:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        left: 10px;
+        top: -20px;
+        z-index: 1;
+        background: #f03a64;
+        transform-origin: bottom right;
+        animation: zhankai2 10s infinite;
+    }
+
+    .petal-1:nth-child(4) {
+        transform: rotate(90deg);
+        width: 40px;
+        height: 40px;
+        left: 0px;
+        top: -20px;
+        z-index: 1;
+        background: #f03a64;
+        transform-origin: bottom right;
+        animation: zhankai1 10s infinite;
+    }
+
+    .petal-1:nth-child(5) {
+        width: 50px;
+        height: 50px;
+        border-radius: 20px;
+        left: 20px;
+        top: -30px;
+        z-index: 0;
+        background: #d1123f;
+    }
+
+    .leaf-1 {
+        position: absolute;
+        top: 120px;
+        left: -115px;
+    }
+
+    .stem-1 {
+        width: 240px;
+        height: 40px;
+        background: transparent;
+        border: 8px solid #8ac78a;
+        border-color: #77a377 transparent transparent transparent;
+        border-radius: 45% 100% 40% 100%;
+        transform: rotate(100deg);
+    }
+
+    .leafs-1 {
+        width: 50px;
+        height: 40px;
+        border-radius: 0px 50%;
+        background: #77a377;
+        position: absolute;
+        top: 0;
+        left: 100px;
+        z-index: 49;
+    }
+
+    .leafs-1:nth-child(2) {
+        width: 40px;
+        height: 20px;
+        top: 40px;
+        left: 140px;
+        transform: rotate(120deg);
+    }
+
+    /* end */
+
+    /* rose 1 */
+
+    .rose-2 {
+        position: absolute;
+        margin-top: 16%;
+        margin-left: -10%;
+        animation: yidon 5s infinite;
+        transform: translateY(40%);
+        rotate: -30deg;
+    }
+
+    .petal-2 {
+        width: 50px;
+        height: 50px;
+        background: #fe7696;
+        border-radius: 0px 50%;
+        position: absolute;
+        box-shadow: 0 0 10px #d1123f;
+        z-index: 2;
+        transform-origin: bottom right;
+        animation: zhankai2 10s infinite;
+    }
+
+    .petal-2:nth-child(2) {
+        transform-origin: right bottom;
+        transform: rotate(90deg);
+        background: #fe7696;
+        left: -10px;
+        animation: zhankai1 10s infinite;
+    }
+
+    .petal-2:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        left: 10px;
+        top: -20px;
+        z-index: 1;
+        background: #f03a64;
+        transform-origin: bottom right;
+        animation: zhankai2 10s infinite;
+    }
+
+    .petal-2:nth-child(4) {
+        transform: rotate(90deg);
+        width: 40px;
+        height: 40px;
+        left: 0px;
+        top: -20px;
+        z-index: 1;
+        background: #f03a64;
+        transform-origin: bottom right;
+        animation: zhankai1 10s infinite;
+    }
+
+    .petal-2:nth-child(5) {
+        width: 50px;
+        height: 50px;
+        border-radius: 20px;
+        left: 20px;
+        top: -30px;
+        z-index: 0;
+        background: #d1123f;
+    }
+
+    .leaf-2 {
+        position: absolute;
+        top: 120px;
+        left: -115px;
+    }
+
+    .stem-2 {
+        margin-left: 15%;
+        width: 240px;
+        height: 40px;
+        background: transparent;
+        border: 8px solid #8ac78a;
+        border-color: transparent transparent #77a377 transparent;
+        border-radius: 50% 25%;
+        transform: rotate(100deg);
+    }
+
+    .leafs-2 {
+        margin-left: -3%;
+        width: 50px;
+        height: 40px;
+        border-radius: 0px 50%;
+        background: #77a377;
+        position: absolute;
+        top: 0;
+        left: 100px;
+        z-index: 49;
+    }
+
+    .leafs-2:nth-child(2) {
+        margin-left: -4%;
+        width: 40px;
+        height: 20px;
+        top: 40px;
+        left: 140px;
+        transform: rotate(120deg);
+    }
+
+    /* end */
+
+    @keyframes yidon {
+        50% {
+            transform: translateY(35%);
+        }
+
+        100% {
+            transform: translateY(40%);
+        }
+    }
+
+    @keyframes zhankai1 {
+        50% {
+            transform: rotate(110deg);
+        }
+
+        100% {
+            transform: rotate(90deg);
+        }
+    }
+
+    @keyframes zhankai2 {
+        50% {
+            transform: rotate(-20deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .main {
+            height: 100%;
+            /* margin-top: 25%; */
+            margin: 0;
+        }
+
+        #falling-hearts {
+            height: 90%;
+        }
+
+        .one {
+            font-size: 2.5rem;
+        }
+
+        .letter {
+            height: auto;
+            padding: 0 5%;
+        }
+
+        .letter h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .inline {
+            margin-left: 30%;
+        }
+
+        .rose-1 {
+            margin-left: 185%;
+            rotate: 20deg;
+        }
+
+        .rose-2 {
+            margin-left: -109%;
+            margin-top: 53%;
+        }
+
+        .wrapper {
+            margin-bottom: 30%;
+        }
+    }
+
+    @media screen and (min-width: 786px) {
+        h1 {
+            font-size: 2.5vw;
+        }
+
+        h1 span {
+            font-size: 6vw;
+        }
+    }
+</style>
 
 <body>
-    <div hidden id="chocolate_rains">
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="heart">
-            <div class="ring"></div>
-            <div class="inner">
-                <div class="regular">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-                <div class="reverse">
-                    <div class="movable">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="falling-hearts"></div>
+    <div class="main">
+        <div class="container">
+            <h1>Happy Vietnamese Women’s Day !</h1>
+            <img src="./2010.jpg" alt="">
+            <p class="sub-text">Chúc mừng ngày 20/10. Chúc cậu xinh lại càng xinh duyên lại càng duyên, thật vui vẻ,
+                hạnh phúc,
+                nụ cười luôn nở trên môi. Với tớ cậu
+                lúc nào cũng xinh đẹp. Yêu cậu</p>
 
-    </div>
-    <div class="container">
-        <div class="valentines">
-            <div class="envelope"></div>
-            <div class="front"></div>
-            <div class="card">
-                <div class="text">Happy</br> Valentine's</br> Day Nhàn</br>❤️</div>
+            <div class="inline">
+                <div class="rose">
+                    <div class="flower">
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                    </div>
+                    <div class="leaf">
+                        <div class="stem"></div>
+                        <div class="leafs"></div>
+                        <div class="leafs"></div>
+                    </div>
+                </div>
+                <div class="rose-1">
+                    <div class="flower">
+                        <div class="petal-1"></div>
+                        <div class="petal-1"></div>
+                        <div class="petal-1"></div>
+                        <div class="petal-1"></div>
+                        <div class="petal-1"></div>
+                    </div>
+                    <div class="leaf-1">
+                        <div class="stem-1"></div>
+                        <div class="leafs-1"></div>
+                        <div class="leafs-1"></div>
+                    </div>
+                </div>
+                <div class="rose-2">
+                    <div class="flower-2">
+                        <div class="petal-2"></div>
+                        <div class="petal-2"></div>
+                        <div class="petal-2"></div>
+                        <div class="petal-2"></div>
+                        <div class="petal-2"></div>
+                    </div>
+                    <div class="leaf-2">
+                        <div class="stem-2"></div>
+                        <div class="leafs-2"></div>
+                        <div class="leafs-2"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script>
-        setTimeout(() => {
-            document.querySelector("#chocolate_rains").hidden = false;
-            document.querySelector("#hide_2").hidden = false;
-            document.querySelector("#hide_3").hidden = false;
+        (() => {
+            const randomInt = (n) => Math.floor(Math.random() * n);
+            document.getElementById("dynamic").innerText = `
+      @keyframes spin {
+          0% {
+            margin-top: 2vh;
+            opacity: 0;
+          }
+          20% {
+            opacity:1.0;
+            margin-top: 0vh;
+            margin-left: 0vw;
+            transform: rotate(${randomInt(90)}deg);
+          }
+          100% {
+            opacity: 0.4;
+            margin-top: 100vh;
+            margin-left: ${randomInt(4)}vw;
+            transform: rotate(1080deg); 
+          }
+        };
+      `;
+            let numberOfHearts = 45;
+            while (numberOfHearts--) {
+                var heartDiv = document.createElement("div");
+                heartDiv.classList.add("heart");
+                heartDiv.style = `animation: spin ${randomInt(14) + 6}s ease-in infinite;
+                          top: ${randomInt(40)}vh;
+                         left: ${randomInt(100)}vw;
+                    font-size: ${randomInt(40) + 20}px;
+                        color: ${["#d00", "#e66", "#fcc"][randomInt(3)]};`;
+                heartDiv.textContent = ["\u2661", "\u2665"][randomInt(2)];
+                document.getElementById("falling-hearts").appendChild(heartDiv);
+            }
+        })();
 
-            document.querySelector("body").style.backgroundColor = '#fff';
-        }, 100);
-
-        $(document).ready(function () {
-            $('.container').click(function () {
-                $('.card').stop().animate({
-                    top: '-90px'
-                }, 'slow');
-            })
-        });
     </script>
 </body>
 
